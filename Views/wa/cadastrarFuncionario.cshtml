@@ -1,0 +1,32 @@
+@model WaMVC.Models.FuncionarioTecnologia
+@{
+    ViewData["Title"] = "Cadastrar";
+}
+
+<h2>Cadastro de Funcionario</h2><br/>
+
+<form class="form-horizontal w-50 p-0" asp-area="" asp-controller="wa" asp-action="salvarFuncionario" method="POST">
+    <input type="hidden" asp-for="Id">
+    <h5 style="font-size: 15px">Nome</h5>
+    <input type="text" class="form-control" required asp-for="Funcionario.Nome" placeholder="Nome Completo"><br/>
+    <h5 style="font-size: 15px">Cargo</h5>
+    <input type="text" class="form-control" required asp-for="Funcionario.Cargo" placeholder="ex: Desenvolvedor .NET"><br/>
+    <h5 style="font-size: 15px">Tecnologia</h5>
+    <input type="text" class="form-control" required asp-for="Tecnologia.Nome" placeholder="ex: .NET"><br/>
+    <h5 style="font-size: 15px">Data e hora de início</h5>
+    <input type="datetime-local" class="form-control" required asp-for="Funcionario.InicioWa" placeholder="Data de início WA"><br/>
+    <h5 style="font-size: 15px">Matrícula</h5>
+    <input type="text" class="form-control" required asp-for="Funcionario.Matricula" placeholder="Matricula"><br/>
+    <div class="form-group">
+        <label for="Funcionario.LocalDeTrabalho" asp-for="Funcionario.LocalDeTrabalho">Local de trabalho</label>
+            <select class="form-control" asp-for="Funcionario.LocalDeTrabalho.Nome">
+                <option value="GFT Curitiba">GFT Curitiba</option>
+                <option value="GFT Alphaville">GFT Alphaville</option>
+                <option value="GFT Sorocaba">GFT Sorocaba</option>
+            </select>
+        <small class="form-text text-muted"> <span class="text-danger" asp-validation-for="Funcionario.LocalDeTrabalho.Nome"></span> </small>
+    </div>
+<br>
+    <button class="btn btn-success text-white">Cadastrar Funcionario</button>
+    @Html.ActionLink("Cancelar", "funcionarios", "wa", null, new {@class = "btn btn-danger"})
+</form>

@@ -1,0 +1,48 @@
+@model IEnumerable<FuncionarioTecnologia>
+
+@{
+    ViewData["Title"] = "Alocar";
+}
+
+<h2>Alocar Funcionário</h2><br>
+<h4 style="font-size: 20px;">Escolha: </h4>
+
+<div id="list" class="row">
+    <div class="table-responsive col-md-12">
+        <table class="table table-striped table-bordered table-hover">
+            <thead style="background-color: #00008B; color: white;">
+                <tr>
+                    <th>Nome</th>
+                    <th>Cargo</th>
+                    <th>Tecnologia</th>
+                    <th>Inicio WA</th>
+                    <th class="actions">Escolher</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var funcionario in Model)
+                {
+                    <tr>
+                        <td>@funcionario.Funcionario.Nome</td>
+                        <td>@funcionario.Funcionario.Cargo</td>
+                        <td>@funcionario.Tecnologia.Nome</td>
+                        <td>@funcionario.Funcionario.InicioWa</td>
+                        <td class="actions">
+                            <form asp-controller="wa" asp-action="alocarFuncionario" style="display:inline;">
+                                <input type="hidden" name="id" id="id" value="@funcionario.Id"/>
+                                <button class="btn btn-primary">Alocar</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    @Html.ActionLink("Voltar", "vagas", "wa", null, new {@class = "page-item btn btn-outline-primary my-2 my-sm-0"})
+    &nbsp;&nbsp;
+    @Html.ActionLink("Próxima", "historico", "wa", null, new {@class = "page-item btn btn-outline-primary my-2 my-sm-0"})
+  </ul>
+</nav>

@@ -1,0 +1,47 @@
+@model IEnumerable<WaMVC.Models.Alocar>;
+
+@{
+    ViewData["Title"] = "Historico";
+}
+
+<form class="form-inline my-2 my-lg-0">
+    @using(Html.BeginForm("funcionarios", "wa", FormMethod.Get))
+    {
+        @Html.TextBox("Pesquisa", null, null, new { @class="form-control mr-sm-2", @style="width:400px;", type="search", placeholder="Pesquisar por Nome de Funcionário"})
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="Pesquisar">Pesquisar</button>
+    }
+</form> <br>
+
+<h2>Funcionários Alocados</h2><br>
+
+<div id="list" class="row">
+    <div class="table-responsive col-md-12">
+        <table class="table table-striped table-bordered table-hover">
+            <thead style="background-color: #00008B; color: white;">
+                <tr>
+                    <th>Funcionário</th>
+                    <th>Cliente</th>
+                    <th>Código da Vaga</th>
+                    <th>Início WA</th>
+                    <th>Início Alocação</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var historico in Model)
+                {
+                    <tr>
+                        <td>@historico.func.Funcionario.Nome</td>
+                        <td>@historico.vag.Vaga.Projeto</td>
+                        <td>@historico.vag.Vaga.CodigoVaga</td>
+                        <td>@historico.func.Funcionario.InicioWa</td>
+                        <td>@historico.InicioAlocacao</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    @Html.ActionLink("Voltar", "listaFuncionarioAlocar", "wa", null, new {@class = "page-item btn btn-outline-primary my-2 my-sm-0"})
+</nav>

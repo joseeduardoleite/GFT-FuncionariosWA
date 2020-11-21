@@ -1,0 +1,44 @@
+@model IEnumerable<VagaTecnologia>
+
+@{
+    ViewData["Title"] = "AlocarVaga";
+}
+
+<h2>Alocar Vaga</h2><br>
+<h4 style="font-size: 20px;">Escolha: </h4>
+
+<div id="list" class="row">
+    <div class="table-responsive col-md-12">
+        <table class="table table-striped table-bordered table-hover">
+            <thead style="background-color: #00008B; color: white;">
+                <tr>
+                    <th>Projeto</th>
+                    <th>Descrição</th>
+                    <th>Tecnologia</th>
+                    <th>Data de Abertura</th>
+                    <th>Quantidade</th>
+                    <th>Cód.</th>
+                    <th class="actions">Escolher</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var vaga in Model)
+                {
+                    <tr>
+                        <td>@vaga.Vaga.Projeto</td>
+                        <td>@vaga.Vaga.DescricaoVaga</td>
+                        <td>@vaga.Tecnologia.Nome</td>
+                        <td>@vaga.Vaga.AberturaVaga</td>
+                        <td>@vaga.Vaga.QuantidadeVaga</td>
+                        <td>@vaga.Vaga.CodigoVaga</td>
+                        <td class="actions">
+                                @Html.ActionLink("Alocar", "alocarVaga", "wa", new { vagaId = @vaga.Id, funcionarioId = @ViewBag.FuncionarioId},
+                                                                               new {@class="btn btn-primary", @style="text: white; text-decoration:none;"})
+                            
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

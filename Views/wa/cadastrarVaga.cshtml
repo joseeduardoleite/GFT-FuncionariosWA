@@ -1,0 +1,24 @@
+@model WaMVC.Models.VagaTecnologia
+@{
+    ViewData["Title"] = "Cadastrar Vaga";
+}
+
+<h2>Cadastro de Vagas</h2><br/>
+
+<form class="form-horizontal w-50 p-0" asp-area="" asp-controller="wa" asp-action="salvarVaga" method="POST">
+    <input type="hidden" asp-for="Id">
+    <h5 style="font-size: 15px">Nome do Projeto</h5>
+    <input type="text" class="form-control" required asp-for="Vaga.Projeto" placeholder="ex: Itáu"><br/>
+    <h5 style="font-size: 15px">Data de Abertura</h5>
+    <input type="datetime-local" class="form-control" required asp-for="Vaga.AberturaVaga" placeholder="Abertura da Vaga"><br/>
+    <h5 style="font-size: 15px">Código</h5>
+    <input type="text" class="form-control" required asp-for="Vaga.CodigoVaga" placeholder="Cód. da Vaga"><br/>
+    <h5 style="font-size: 15px">Descrição</h5>
+    <input type="text" class="form-control" required asp-for="Vaga.DescricaoVaga" placeholder="ex: Desenvolvedor .NET Sênior"><br/>
+    <h5 style="font-size: 15px">Tecnologia</h5>
+    <input type="text" class="form-control" required asp-for="Tecnologia.Nome" placeholder="ex: .NET"><br/>
+    <h5 style="font-size: 15px">Quantidade</h5>
+    <input type="number" class="form-control" required asp-for="Vaga.QuantidadeVaga" placeholder="Quantidade de Vagas"><br/>
+    <button class="btn btn-success text-white">Cadastrar Vaga</button>
+    @Html.ActionLink("Cancelar", "vagas", "wa", null, new {@class = "btn btn-danger"})
+</form>

@@ -1,0 +1,62 @@
+@model IEnumerable<WaMVC.Models.FuncionarioTecnologia>;
+
+@{
+    ViewData["Title"] = "Funcionarios";
+}
+
+<div class="sidebar">
+    @Html.ActionLink("Cadastrar Funcionario em WA", "cadastrarFuncionario", "wa", null, new {@class = "btn btn-success", @style="padding: 10px; font-size: medium; float: right"})
+</div>
+
+<form class="form-inline my-2 my-lg-0">
+    @using(Html.BeginForm("funcionarios", "wa", FormMethod.Get))
+    {
+        @Html.TextBox("Pesquisa", null, null, new { @class="form-control mr-sm-2", @style="width:400px;", type="search", placeholder="Pesquisar por Nome"})
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="Pesquisar">Pesquisar</button>
+    }
+</form> <br><br>
+
+<h2>Lista de Funcionários</h2> <br>
+
+<div id="list" class="row">
+    <div class="table-responsive col-md-12">
+        <table class="table table-striped table-bordered table-hover">
+            <thead style="background-color: #00008B; color: white;">
+                <tr>
+                    <th>Nome</th>
+                    <th>Cargo</th>
+                    <th>Inicio WA</th>
+                    <th>Tecnologia</th>
+                    <th>Previsão término WA</th>
+                    <th class="actions">Opções</th>
+                </tr>
+            </thead>
+                <tbody>
+                    @foreach (var funcionarios in Model)
+                    {
+                        <tr>
+                            <td>@funcionarios.Funcionario.Nome</td>
+                            <td>@funcionarios.Funcionario.Cargo</td>
+                            <td>@funcionarios.Funcionario.InicioWa</td>
+                            <td>@funcionarios.Tecnologia.Nome</td>
+                            <td>@funcionarios.Funcionario.TerminoWa</td>
+                            <td class="actions">
+                            <a class="btn btn-warning btn-xs" style="padding: 4px" href="/wa/editarFuncionario/@funcionarios.Id">Editar</a>
+                            <a class="btn btn-danger btn-xs" style="padding: 4px" href="/wa/deletarFuncionario/@funcionarios.Id">Deletar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+        </table>
+    </div>
+</div>
+
+<br>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    @Html.ActionLink("Voltar", "Index", "wa", null, new {@class = "page-item btn btn-outline-primary my-2 my-sm-0"})
+    &nbsp;&nbsp;
+    @Html.ActionLink("Próxima", "vagas", "wa", null, new {@class = "page-item btn btn-outline-primary my-2 my-sm-0"})
+  </ul>
+</nav>
